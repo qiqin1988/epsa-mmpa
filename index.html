@@ -230,158 +230,77 @@ margin-bottom:30px;
 
 </div>
 
+
 <script>
-
 const API_URL="https://script.google.com/macros/s/AKfycby18A9luLxRnX0yWmvVKRlz_wwgHff-BcoeQeDcbeNXvD5zGRKWbI2xpa2fhPlmGsaKAg/exec";
-let allData = [];
-fetch(API_URL,{
-    method:"GET"
-})
-.then(response=>response.json())
-.then(data=>{
+let allData=[];
 
-    const unique=[];
-    const seen=new Set();
-    const jabatanCount = {};
-
-    data.forEach(item=>{
-
-        const key = String(item.ic)
-    .replace(/-/g,"")
-    .replace(/\s/g,"")
-    .trim();
-
-        if(!seen.has(key)){
-
-            seen.add(key);
-
-            unique.push(item);
-
-        }
-
-    });
- allData = unique;
-
-    let jumlahLengkap=0;
-
-    let html="";
-
-    unique.forEach(item=>{
-
-        const status=item.sijil ? "Lengkap":"Belum";
-        const jabatan = item.jabatan || "TIADA JABATAN";
-
-jabatanCount[jabatan] = (jabatanCount[jabatan] || 0) + 1;
-
-        if(status==="Lengkap") jumlahLengkap++;
-
-        html+=`
-        <tr>
-            <td style="padding:10px">${item.nama}</td>
-            <td>${item.jawatan}</td>
-            <td>${item.jabatan}</td>
-            <td style="color:${status==="Lengkap"?"green":"red"}">${status}</td>
-        </tr>
-        `;
-
-    });
-let cardHTML = "";
-
-Object.entries(jabatanCount)
-.sort((a,b)=>b[1]-a[1])
-.forEach(([jabatan,bil])=>{
-
-cardHTML += `
-<div class="dept-card"
-data-jabatan="${jabatan}"
-style="
-background:white;
-border-radius:16px;
-padding:20px;
-box-shadow:0 5px 15px rgba(0,0,0,.1);
-cursor:pointer;
-transition:.3s;
-border-left:6px solid #0B5ED7;
-">
-
-<h3 style="margin-bottom:10px;">🏥 ${jabatan}</h3>
-
-<p style="font-size:28px;font-weight:bold;color:#0B5ED7;">
-👥 ${bil}
-</p>
-
-<small>Klik untuk lihat senarai pegawai</small>
-
-</div>
-`;
-
-});
-
-document.getElementById("departmentCards").innerHTML = cardHTML;
-   document.querySelectorAll(".dept-card").forEach(card => {
-
-    card.addEventListener("click", () => {
-
-        showDepartment(card.dataset.jabatan);
-
-    });
-
-});
-
-document.getElementById("tableBody").innerHTML = html;
-
-document.getElementById("jumlah").textContent = unique.length;
-
-document.getElementById("lengkap").textContent = jumlahLengkap;
-
-document.getElementById("belum").textContent = unique.length - jumlahLengkap;
-
-document.getElementById("peratus").textContent =
-((jumlahLengkap/unique.length)*100).toFixed(1)+"%";
-
-document.getElementById("lastUpdate").textContent =
-"Kemaskini : " + new Date().toLocaleString("ms-MY");
-    
-
-
-    
-    }) 
-    
-.catch(error=>{
-
-    console.error(error);
-
-    alert(error);
-
-});
- function showDepartment(jabatan){
-
-    let html = "";
-
-    const filtered = allData.filter(item => item.jabatan === jabatan);
-
-    filtered.forEach(item=>{
-
-        const status = item.sijil ? "Lengkap" : "Belum";
-
-        html += `
-        <tr>
-            <td style="padding:10px">${item.nama}</td>
-            <td>${item.jawatan}</td>
-            <td>${item.jabatan}</td>
-            <td style="color:${status==="Lengkap"?"green":"red"};font-weight:bold;">
-                ${status}
-            </td>
-        </tr>
-        `;
-
-    });
-
-    document.getElementById("tableBody").innerHTML = html;
-
+function renderTable(rows){
+ let html="";
+ rows.forEach(item=>{
+   const status=item.sijil?"Lengkap":"Belum";
+   html+=`<tr>
+<td style="padding:10px">${item.nama}</td>
+<td>${item.jawatan}</td>
+<td>${item.jabatan}</td>
+<td style="color:${status==="Lengkap"?"green":"red"};font-weight:bold">${status}</td>
+</tr>`;
+ });
+ document.getElementById("tableBody").innerHTML=html;
 }
 
-  </script>
+function showDepartment(jabatan){
+ renderTable(allData.filter(x=>x.jabatan===jabatan));
+}
+
+fetch(API_URL)
+.then(r=>r.json())
+.then(data=>{
+ const seen=new Set();
+ allData=data.filter(item=>{
+   const key=String(item.ic).replace(/-/g,"").replace(/\s/g,"").trim();
+   if(seen.has(key)) return false;
+   seen.add(key);
+   return true;
+ });
+
+ let lengkap=0;
+ const jabatanCount={};
+
+ allData.forEach(item=>{
+   if(item.sijil) lengkap++;
+   const j=item.jabatan||"TIADA JABATAN";
+   jabatanCount[j]=(jabatanCount[j]||0)+1;
+ });
+
+ document.getElementById("jumlah").textContent=allData.length;
+ document.getElementById("lengkap").textContent=lengkap;
+ document.getElementById("belum").textContent=allData.length-lengkap;
+ document.getElementById("peratus").textContent=((lengkap/allData.length)*100).toFixed(1)+"%";
+ document.getElementById("lastUpdate").textContent="Kemaskini : "+new Date().toLocaleString("ms-MY");
+
+ renderTable(allData);
+
+ const wrap=document.getElementById("departmentCards");
+ wrap.innerHTML="";
+
+ Object.entries(jabatanCount).sort((a,b)=>b[1]-a[1]).forEach(([jabatan,bil])=>{
+   const card=document.createElement("div");
+   card.className="dept-card";
+   card.style.cssText="background:white;border-radius:16px;padding:20px;box-shadow:0 5px 15px rgba(0,0,0,.1);cursor:pointer;border-left:6px solid #0B5ED7";
+   card.innerHTML=`<h3 style="margin-bottom:10px;">🏥 ${jabatan}</h3>
+   <p style="font-size:28px;font-weight:bold;color:#0B5ED7;">👥 ${bil}</p>
+   <small>Klik untuk lihat senarai pegawai</small>`;
+   card.addEventListener("click",()=>showDepartment(jabatan));
+   wrap.appendChild(card);
+ });
+})
+.catch(err=>{
+ console.error(err);
+ alert("Ralat memuatkan data.");
+});
+</script>
+
 
 </body>
 
