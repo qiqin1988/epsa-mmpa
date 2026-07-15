@@ -915,16 +915,40 @@ function renderTable(data){
             <small>Klik untuk lihat pegawai</small>
         `;
 card.addEventListener("click",()=>{
-alert(jabatan);
-   const filtered = allData.filter(item => item.jabatan === jabatan);
 
-alert(filtered.length);
-    console.log(filtered);
+    const filtered = allData.filter(item => item.jabatan === jabatan);
 
-renderTable(filtered);
+    document.getElementById("drawerTitle").textContent = jabatan;
 
-    document.getElementById("tableTitle").textContent=
-    "Senarai Pegawai - " + jabatan;
+    document.getElementById("drawerCount").textContent =
+    filtered.length + " Pegawai";
+
+    let html = "";
+
+    filtered.forEach(item=>{
+
+        const status = item.sijil ? "✅ Lengkap" : "❌ Belum";
+
+        html += `
+        <div style="
+        padding:15px;
+        border-bottom:1px solid #eee;
+        ">
+
+            <strong>${item.nama}</strong><br>
+
+            <small>${item.jawatan}</small><br>
+
+            <span>${status}</span>
+
+        </div>
+        `;
+
+    });
+
+    document.getElementById("drawerBody").innerHTML = html;
+
+    openDrawer();
 
 });
         grid.appendChild(card);
