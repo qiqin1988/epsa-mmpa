@@ -221,74 +221,73 @@ Kemaskini :
 
 const API_URL="https://script.google.com/macros/s/AKfycby18A9luLxRnX0yWmvVKRlz_wwgHff-BcoeQeDcbeNXvD5zGRKWbI2xpa2fhPlmGsaKAg/exec";
 
-fetch(API_URL)
-.then(res=>res.json())
+fetch(API_URL,{
+    method:"GET"
+})
+.then(response=>response.json())
 .then(data=>{
 
-// Buang duplicate ikut IC
-const unique = [];
+    const unique=[];
+    const seen=new Set();
 
-const seen = new Set();
+    data.forEach(item=>{
 
-data.forEach(x=>{
+        const key=String(item.ic).trim();
 
-const key = String(x.ic).trim();
+        if(!seen.has(key)){
 
-if(!seen.has(key)){
+            seen.add(key);
 
-seen.add(key);
+            unique.push(item);
 
-unique.push(x);
+        }
 
-}
+    });
 
-});
+    let jumlahLengkap=0;
 
-let lengkap = 0;
+    let html="";
 
-let html="";
+    unique.forEach(item=>{
 
-unique.forEach(item=>{
+        const status=item.sijil ? "Lengkap":"Belum";
 
-const status = item.sijil ? "Lengkap" : "Belum";
+        if(status==="Lengkap") jumlahLengkap++;
 
-if(status=="Lengkap") lengkap++;
+        html+=`
+        <tr>
+            <td style="padding:10px">${item.nama}</td>
+            <td>${item.jawatan}</td>
+            <td>${item.jabatan}</td>
+            <td style="color:${status==="Lengkap"?"green":"red"}">${status}</td>
+        </tr>
+        `;
 
-html+=`
+    });
 
-<tr>
+    document.getElementById("tableBody").innerHTML=html;
 
-<td style="padding:10px">${item.nama}</td>
+    document.getElementById("jumlah").textContent=unique.length;
 
-<td>${item.jawatan}</td>
+    document.getElementById("lengkap").textContent=jumlahLengkap;
 
-<td>${item.jabatan}</td>
+    document.getElementById("belum").textContent=unique.length-jumlahLengkap;
 
-<td style="color:${status=="Lengkap"?"green":"red"};font-weight:bold">
+    document.getElementById("peratus").textContent=((jumlahLengkap/unique.length)*100).toFixed(1)+"%";
 
-${status}
+    document.getElementById("lastUpdate").textContent="Kemaskini : "+new Date().toLocaleString("ms-MY");
 
-</td>
+})
+.catch(error=>{
 
-</tr>
+    console.error(error);
 
-`;
-
-});
-
-tableBody.innerHTML = html;
-
-jumlah.innerHTML = unique.length;
-
-lengkap.innerHTML = lengkap;
-
-belum.innerHTML = unique.length - lengkap;
-
-peratus.innerHTML =
-((lengkap/unique.length)*100).toFixed(1)+"%";
-
-lastUpdate.innerHTML =
-"Kemaskini : " +
-new Date().toLocaleString("ms-MY");
+    alert(error);
 
 });
+
+  </script>
+
+</body>
+
+</html>
