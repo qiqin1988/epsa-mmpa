@@ -192,3 +192,103 @@ Kemaskini :
 </div>
 
 </div>
+<h2 style="margin-bottom:15px;">Senarai Pegawai</h2>
+
+<table style="width:100%;background:white;border-collapse:collapse;box-shadow:0 5px 15px rgba(0,0,0,.08);">
+
+<thead>
+
+<tr style="background:#0B5ED7;color:white;">
+
+<th style="padding:12px;">Nama</th>
+<th>Jawatan</th>
+<th>Jabatan</th>
+<th>Status</th>
+
+</tr>
+
+</thead>
+
+<tbody id="tableBody">
+
+</tbody>
+
+</table>
+
+</div>
+
+<script>
+
+const API_URL="https://script.google.com/macros/s/AKfycby18A9luLxRnX0yWmvVKRlz_wwgHff-BcoeQeDcbeNXvD5zGRKWbI2xpa2fhPlmGsaKAg/exec";
+
+fetch(API_URL)
+.then(res=>res.json())
+.then(data=>{
+
+// Buang duplicate ikut IC
+const unique = [];
+
+const seen = new Set();
+
+data.forEach(x=>{
+
+const key = String(x.ic).trim();
+
+if(!seen.has(key)){
+
+seen.add(key);
+
+unique.push(x);
+
+}
+
+});
+
+let lengkap = 0;
+
+let html="";
+
+unique.forEach(item=>{
+
+const status = item.sijil ? "Lengkap" : "Belum";
+
+if(status=="Lengkap") lengkap++;
+
+html+=`
+
+<tr>
+
+<td style="padding:10px">${item.nama}</td>
+
+<td>${item.jawatan}</td>
+
+<td>${item.jabatan}</td>
+
+<td style="color:${status=="Lengkap"?"green":"red"};font-weight:bold">
+
+${status}
+
+</td>
+
+</tr>
+
+`;
+
+});
+
+tableBody.innerHTML = html;
+
+jumlah.innerHTML = unique.length;
+
+lengkap.innerHTML = lengkap;
+
+belum.innerHTML = unique.length - lengkap;
+
+peratus.innerHTML =
+((lengkap/unique.length)*100).toFixed(1)+"%";
+
+lastUpdate.innerHTML =
+"Kemaskini : " +
+new Date().toLocaleString("ms-MY");
+
+});
