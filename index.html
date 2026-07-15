@@ -294,7 +294,7 @@ Object.entries(jabatanCount)
 cardHTML += `
 
 <div class="dept-card"
-onclick="showDepartment('${jabatan.replace(/'/g,"\\'")}')"
+data-jabatan="${jabatan}"
 style="
 background:white;
 border-radius:16px;
@@ -320,6 +320,14 @@ border-left:6px solid #0B5ED7;
 });
 
 document.getElementById("departmentCards").innerHTML = cardHTML;
+    document.querySelectorAll(".dept-card").forEach(card => {
+
+    card.addEventListener("click", function(){
+
+        showDepartment(this.dataset.jabatan);
+
+    });
+
     document.getElementById("tableBody").innerHTML=html;
 
     document.getElementById("jumlah").textContent=unique.length;
