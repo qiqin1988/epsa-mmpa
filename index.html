@@ -752,6 +752,63 @@ Dashboard Pemantauan EPSA MMPA © 2026
 Hospital Pulau Pinang
 
 </footer>
+    <!-- Drawer Senarai Pegawai -->
+
+<div id="drawer" style="
+position:fixed;
+top:0;
+right:-500px;
+width:450px;
+height:100%;
+background:white;
+box-shadow:-8px 0 20px rgba(0,0,0,.2);
+transition:0.3s;
+z-index:9999;
+display:flex;
+flex-direction:column;
+">
+
+    <div style="
+    background:#0B5ED7;
+    color:white;
+    padding:20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    ">
+
+        <div>
+
+            <h2 id="drawerTitle">Jabatan</h2>
+
+            <small id="drawerCount">0 Pegawai</small>
+
+        </div>
+
+        <button onclick="closeDrawer()" style="
+        background:none;
+        border:none;
+        color:white;
+        font-size:28px;
+        cursor:pointer;
+        ">
+
+        &times;
+
+        </button>
+
+    </div>
+
+    <div id="drawerBody"
+    style="
+    flex:1;
+    overflow:auto;
+    padding:20px;
+    ">
+
+    </div>
+
+</div>
     <script>
 
 const API_URL = "https://script.google.com/macros/s/AKfycby18A9luLxRnX0yWmvVKRlz_wwgHff-BcoeQeDcbeNXvD5zGRKWbI2xpa2fhPlmGsaKAg/exec";
@@ -772,7 +829,17 @@ function showLoading(show){
     loadingOverlay.style.display = show ? "flex" : "none";
 
 }
+function openDrawer(){
 
+    document.getElementById("drawer").style.right = "0";
+
+}
+
+function closeDrawer(){
+
+    document.getElementById("drawer").style.right = "-500px";
+
+}
 function renderTable(data){
 
     let html = "";
