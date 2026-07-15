@@ -293,7 +293,7 @@ Object.entries(jabatanCount)
 
 cardHTML += `
 <div class="dept-card"
-data-jabatan="${jabatan}"
+onclick="showDepartment('${jabatan.replace(/'/g, "\\'")}')"
 style="
 background:white;
 border-radius:16px;
@@ -332,16 +332,12 @@ document.getElementById("peratus").textContent =
 
 document.getElementById("lastUpdate").textContent =
 "Kemaskini : " + new Date().toLocaleString("ms-MY");
+    
 
-document.querySelectorAll(".dept-card").forEach(card=>{
 
-card.addEventListener("click",function(){
-
-showDepartment(this.dataset.jabatan);
-
-});
-
-});
+    
+    }) 
+    
 .catch(error=>{
 
     console.error(error);
