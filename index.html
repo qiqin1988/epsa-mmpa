@@ -796,6 +796,7 @@ flex-direction:column;
         &times;
 
         </button>
+        </div>
 
 
 
@@ -918,7 +919,7 @@ function renderTable(data){
 card.addEventListener("click",()=>{
 
     const filtered = allData.filter(item => item.jabatan === jabatan);
-    let currentData = [...filtered];
+  
 
     document.getElementById("drawerTitle").textContent = jabatan;
 
@@ -989,45 +990,6 @@ ${item.sijil ? 'Lengkap':'Belum'}
     document.getElementById("drawerBody").innerHTML = html;
 
 
-    let html = "";
-
-    result.forEach(item=>{
-
-        html += `
-        <div style="
-        background:#fff;
-        border-radius:12px;
-        padding:15px;
-        margin-bottom:12px;
-        box-shadow:0 2px 10px rgba(0,0,0,.08);
-        ">
-
-            <div style="display:flex;justify-content:space-between;">
-
-                <div>
-
-                    <strong>${item.nama}</strong><br>
-
-                    <small>${item.jawatan}</small>
-
-                </div>
-
-                <div>
-
-                    ${item.sijil ? "✅" : "❌"}
-
-                </div>
-
-            </div>
-
-        </div>
-        `;
-
-    });
-
-    document.getElementById("drawerBody").innerHTML = html;
-
-};
 
     openDrawer();
 
