@@ -193,24 +193,17 @@ Kemaskini :
 
 </div>
 
- <h2 style="margin-bottom:15px;">Ringkasan Mengikut Jabatan</h2>
+<h2 style="margin-bottom:15px;">Ringkasan Mengikut Jabatan</h2>
 
-<table style="width:100%;background:white;border-collapse:collapse;box-shadow:0 5px 15px rgba(0,0,0,.08);margin-bottom:25px;">
+<div id="departmentCards"
+style="
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(250px,1fr));
+gap:20px;
+margin-bottom:30px;
+">
 
-<thead>
-
-<tr style="background:#198754;color:white;">
-    <th style="padding:12px;">Jabatan</th>
-    <th>Bilangan Hantar</th>
-</tr>
-
-</thead>
-
-<tbody id="jabatanBody">
-
-</tbody>
-
-</table>
+</div>
     
 <h2 style="margin-bottom:15px;">Senarai Pegawai</h2>
 
@@ -240,7 +233,7 @@ Kemaskini :
 <script>
 
 const API_URL="https://script.google.com/macros/s/AKfycby18A9luLxRnX0yWmvVKRlz_wwgHff-BcoeQeDcbeNXvD5zGRKWbI2xpa2fhPlmGsaKAg/exec";
-
+let allData = [];
 fetch(API_URL,{
     method:"GET"
 })
@@ -253,7 +246,10 @@ fetch(API_URL,{
 
     data.forEach(item=>{
 
-        const key=String(item.ic).trim();
+        const key = String(item.ic)
+    .replace(/-/g,"")
+    .replace(/\s/g,"")
+    .trim();
 
         if(!seen.has(key)){
 
@@ -264,6 +260,7 @@ fetch(API_URL,{
         }
 
     });
+ allData = unique;
 
     let jumlahLengkap=0;
 
@@ -288,22 +285,41 @@ jabatanCount[jabatan] = (jabatanCount[jabatan] || 0) + 1;
         `;
 
     });
-let jabatanHTML = "";
+let cardHTML = "";
 
 Object.entries(jabatanCount)
 .sort((a,b)=>b[1]-a[1])
 .forEach(([jabatan,bil])=>{
 
-    jabatanHTML += `
-    <tr>
-        <td style="padding:10px">${jabatan}</td>
-        <td style="text-align:center;font-weight:bold">${bil}</td>
-    </tr>
-    `;
+cardHTML += `
+
+<div class="dept-card"
+onclick="showDepartment('${jabatan.replace(/'/g,"\\'")}')"
+style="
+background:white;
+border-radius:16px;
+padding:20px;
+box-shadow:0 5px 15px rgba(0,0,0,.1);
+cursor:pointer;
+transition:.3s;
+border-left:6px solid #0B5ED7;
+">
+
+<h3 style="margin-bottom:10px;">🏥 ${jabatan}</h3>
+
+<p style="font-size:28px;font-weight:bold;color:#0B5ED7;">
+👥 ${bil}
+</p>
+
+<small>Klik untuk lihat senarai pegawai</small>
+
+</div>
+
+`;
 
 });
 
-document.getElementById("jabatanBody").innerHTML = jabatanHTML;
+document.getElementById("departmentCards").innerHTML = cardHTML;
     document.getElementById("tableBody").innerHTML=html;
 
     document.getElementById("jumlah").textContent=unique.length;
@@ -324,6 +340,32 @@ document.getElementById("jabatanBody").innerHTML = jabatanHTML;
     alert(error);
 
 });
+ function showDepartment(jabatan){
+
+    let html = "";
+
+    const filtered = allData.filter(item => item.jabatan === jabatan);
+
+    filtered.forEach(item=>{
+
+        const status = item.sijil ? "Lengkap" : "Belum";
+
+        html += `
+        <tr>
+            <td style="padding:10px">${item.nama}</td>
+            <td>${item.jawatan}</td>
+            <td>${item.jabatan}</td>
+            <td style="color:${status==="Lengkap"?"green":"red"};font-weight:bold;">
+                ${status}
+            </td>
+        </tr>
+        `;
+
+    });
+
+    document.getElementById("tableBody").innerHTML = html;
+
+}
 
   </script>
 
