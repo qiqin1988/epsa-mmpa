@@ -10,54 +10,125 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
 
+:root{
+
+--primary:#0B5ED7;
+--primary-dark:#084298;
+--success:#198754;
+--danger:#DC3545;
+--warning:#FFC107;
+--bg:#F4F7FC;
+--card:#FFFFFF;
+--text:#1F2937;
+--muted:#6B7280;
+--border:#E5E7EB;
+
+}
+
 *{
+
 margin:0;
 padding:0;
 box-sizing:border-box;
 font-family:'Poppins',sans-serif;
+
+}
+
+html{
+
+scroll-behavior:smooth;
+
 }
 
 body{
 
-background:#edf2f7;
+background:var(--bg);
+color:var(--text);
 
 }
 
-.header{
+a{
 
-background:#0B5ED7;
-color:white;
-padding:20px 40px;
-
-display:flex;
-justify-content:space-between;
-align-items:center;
-
-box-shadow:0 5px 20px rgba(0,0,0,.15);
+text-decoration:none;
 
 }
 
-.header h1{
+button{
 
-font-size:28px;
-
-}
-
-.header small{
-
-opacity:.8;
+font-family:'Poppins',sans-serif;
+cursor:pointer;
 
 }
 
 .container{
 
-padding:25px;
+width:95%;
+max-width:1600px;
+margin:auto;
+
+}
+
+.header{
+
+background:linear-gradient(135deg,#0B5ED7,#1E88E5);
+
+color:#fff;
+
+padding:25px 40px;
+
+box-shadow:0 8px 25px rgba(0,0,0,.15);
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+flex-wrap:wrap;
+
+gap:20px;
+
+}
+
+.header-left h1{
+
+font-size:30px;
+font-weight:700;
+
+}
+
+.header-left p{
+
+opacity:.9;
+margin-top:5px;
+
+}
+
+.header-right{
+
+text-align:right;
+
+}
+
+.header-right span{
+
+display:block;
+
+font-size:14px;
+
+opacity:.9;
+
+}
+
+.section{
+
+margin-top:25px;
 
 }
 
@@ -69,342 +140,750 @@ grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
 
 gap:20px;
 
-margin-bottom:25px;
-
 }
 
 .card{
 
-background:white;
-
-padding:25px;
+background:var(--card);
 
 border-radius:18px;
 
-box-shadow:0 10px 25px rgba(0,0,0,.08);
+padding:25px;
 
-transition:.3s;
+box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+transition:.25s;
+
+position:relative;
+
+overflow:hidden;
 
 }
 
 .card:hover{
 
-transform:translateY(-5px);
-
-}
-    .dept-card:hover{
-
-transform:translateY(-6px) scale(1.02);
-
-box-shadow:0 18px 35px rgba(11,94,215,.18);
+transform:translateY(-6px);
 
 }
 
-.dept-card::before{
+.card::before{
 
 content:"";
 
 position:absolute;
 
+left:0;
+
 top:0;
 
-left:0;
+width:6px;
+
+height:100%;
+
+background:var(--primary);
+
+}
+
+.card-icon{
+
+font-size:28px;
+
+color:var(--primary);
+
+margin-bottom:12px;
+
+}
+
+.card-title{
+
+font-size:14px;
+
+color:var(--muted);
+
+margin-bottom:8px;
+
+}
+
+.card-value{
+
+font-size:38px;
+
+font-weight:700;
+
+}
+
+.card-sub{
+
+margin-top:8px;
+
+font-size:13px;
+
+color:var(--muted);
+
+}
+
+.toolbar{
+
+margin:30px 0 20px;
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+gap:20px;
+
+flex-wrap:wrap;
+
+}
+
+.toolbar h2{
+
+font-size:24px;
+
+}
+
+.search-box{
+
+position:relative;
+
+width:350px;
+
+max-width:100%;
+
+}
+
+.search-box input{
 
 width:100%;
 
-height:5px;
+padding:14px 18px 14px 48px;
 
-background:linear-gradient(90deg,#0B5ED7,#5aa9ff);
+border-radius:12px;
 
-}
+border:1px solid var(--border);
 
-.card i{
+font-size:15px;
 
-font-size:30px;
+outline:none;
 
-color:#0B5ED7;
-
-margin-bottom:10px;
+background:#fff;
 
 }
 
-.card h2{
+.search-box i{
+
+position:absolute;
+
+left:16px;
+
+top:15px;
+
+color:#888;
+
+}
+
+.department-grid{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fill,minmax(270px,1fr));
+
+gap:20px;
+
+margin-bottom:35px;
+
+}
+
+.department-card{
+
+background:#fff;
+
+border-radius:18px;
+
+padding:22px;
+
+box-shadow:0 8px 22px rgba(0,0,0,.08);
+
+cursor:pointer;
+
+transition:.25s;
+
+border-left:6px solid var(--primary);
+
+}
+
+.department-card:hover{
+
+transform:translateY(-6px);
+
+box-shadow:0 15px 35px rgba(0,0,0,.12);
+
+}
+
+.department-card.active{
+
+background:var(--primary);
+
+color:#fff;
+
+}
+
+.department-card.active small{
+
+color:#EAF2FF;
+
+}
+
+.department-card h3{
+
+font-size:18px;
+
+margin-bottom:12px;
+
+}
+
+.department-total{
 
 font-size:34px;
 
-margin-top:10px;
+font-weight:700;
 
 }
 
-.card p{
+.progress{
 
-color:#666;
+height:8px;
+
+background:#E5E7EB;
+
+border-radius:20px;
+
+margin:14px 0;
+
+overflow:hidden;
+
+}
+
+.progress span{
+
+display:block;
+
+height:100%;
+
+width:0%;
+
+background:var(--success);
+
+}
+
+.table-card{
+
+background:#fff;
+
+border-radius:18px;
+
+padding:20px;
+
+box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+overflow:auto;
+
+}
+
+table{
+
+width:100%;
+
+border-collapse:collapse;
+
+min-width:900px;
+
+}
+
+thead{
+
+background:var(--primary);
+
+color:#fff;
+
+}
+
+th{
+
+padding:15px;
+
+text-align:left;
+
+font-weight:600;
+
+}
+
+td{
+
+padding:14px 15px;
+
+border-bottom:1px solid #EEE;
+
+font-size:14px;
+
+}
+
+tbody tr:hover{
+
+background:#F8FAFC;
+
+}
+
+.status{
+
+padding:6px 12px;
+
+border-radius:30px;
+
+font-size:12px;
+
+font-weight:600;
+
+display:inline-block;
+
+}
+
+.status.complete{
+
+background:#D1FAE5;
+
+color:#065F46;
+
+}
+
+.status.pending{
+
+background:#FEE2E2;
+
+color:#991B1B;
+
+}
+
+@media(max-width:768px){
+
+.header{
+
+padding:20px;
+
+}
+
+.header h1{
+
+font-size:24px;
+
+}
+
+.toolbar{
+
+flex-direction:column;
+
+align-items:stretch;
+
+}
+
+.search-box{
+
+width:100%;
+
+}
 
 }
 
 </style>
 
-</head>
+    </head>
 
 <body>
 
-<div class="header">
+<header class="header">
 
-<div>
+    <div class="header-left">
+        <h1><i class="fa-solid fa-chart-column"></i> Dashboard Pemantauan EPSA MMPA</h1>
+        <p>Hospital Pulau Pinang</p>
+    </div>
 
-<h1>Dashboard Pemantauan EPSA MMPA</h1>
+    <div class="header-right">
+        <span id="lastUpdate">Kemaskini : -</span>
+    </div>
 
-<small>Hospital Pulau Pinang</small>
-
-</div>
-
-<div>
-
-<small id="lastUpdate">
-
-Kemaskini :
-
--
-
-</small>
-
-</div>
-
-</div>
+</header>
 
 <div class="container">
 
-<div class="cards">
+    <!-- KPI -->
 
-<div class="card">
+    <section class="section">
 
-<i class="fa-solid fa-users"></i>
+        <div class="cards">
 
-<p>Jumlah Pegawai</p>
+            <div class="card">
 
-<h2 id="jumlah">0</h2>
+                <div class="card-icon">
+                    <i class="fa-solid fa-users"></i>
+                </div>
+
+                <div class="card-title">
+                    Jumlah Pegawai
+                </div>
+
+                <div class="card-value" id="jumlah">
+                    0
+                </div>
+
+                <div class="card-sub">
+                    Keseluruhan respon diterima
+                </div>
+
+            </div>
+
+            <div class="card">
+
+                <div class="card-icon">
+                    <i class="fa-solid fa-circle-check"></i>
+                </div>
+
+                <div class="card-title">
+                    Lengkap
+                </div>
+
+                <div class="card-value" id="lengkap">
+                    0
+                </div>
+
+                <div class="card-sub">
+                    Sudah menghantar sijil
+                </div>
+
+            </div>
+
+            <div class="card">
+
+                <div class="card-icon">
+                    <i class="fa-solid fa-circle-xmark"></i>
+                </div>
+
+                <div class="card-title">
+                    Belum Lengkap
+                </div>
+
+                <div class="card-value" id="belum">
+                    0
+                </div>
+
+                <div class="card-sub">
+                    Belum menghantar sijil
+                </div>
+
+            </div>
+
+            <div class="card">
+
+                <div class="card-icon">
+                    <i class="fa-solid fa-chart-line"></i>
+                </div>
+
+                <div class="card-title">
+                    Peratus Siap
+                </div>
+
+                <div class="card-value" id="peratus">
+                    0%
+                </div>
+
+                <div class="card-sub">
+                    Status keseluruhan
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Toolbar -->
+
+    <section class="toolbar">
+
+        <h2>
+            Ringkasan Mengikut Jabatan
+        </h2>
+
+        <div class="search-box">
+
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+            <input
+                type="text"
+                id="searchDepartment"
+                placeholder="Cari jabatan..."
+            >
+
+        </div>
+
+    </section>
+
+
+    <!-- Department Cards -->
+
+    <div
+        id="departmentGrid"
+        class="department-grid">
+
+    </div>
+
+
+    <!-- Table -->
+
+    <div class="table-card">
+
+        <h2 style="margin-bottom:18px;" id="tableTitle">
+            Senarai Pegawai
+        </h2>
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>Nama</th>
+
+                    <th>Jawatan</th>
+
+                    <th>Jabatan</th>
+
+                    <th>Status</th>
+
+                    <th>Tarikh</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody id="tableBody">
+
+            </tbody>
+
+        </table>
+
+    </div>
 
 </div>
 
-<div class="card">
+    <!-- Loading Overlay -->
 
-<i class="fa-solid fa-circle-check"></i>
-
-<p>Lengkap</p>
-
-<h2 id="lengkap">0</h2>
-
-</div>
-
-<div class="card">
-
-<i class="fa-solid fa-circle-xmark"></i>
-
-<p>Belum Lengkap</p>
-
-<h2 id="belum">0</h2>
-
-</div>
-
-<div class="card">
-
-<i class="fa-solid fa-chart-line"></i>
-
-<p>Peratus Siap</p>
-
-<h2 id="peratus">0%</h2>
-
-</div>
-
-
-<h2 style="margin-bottom:15px;">Ringkasan Mengikut Jabatan</h2>
-
-<div id="departmentCards"
+<div id="loadingOverlay"
 style="
-display:grid;
-grid-template-columns:repeat(auto-fill,minmax(250px,1fr));
-gap:20px;
-margin-bottom:30px;
-">
-
-</div>
-    
-<h2 style="margin-bottom:15px;">Senarai Pegawai</h2>
-
-<table style="width:100%;background:white;border-collapse:collapse;box-shadow:0 5px 15px rgba(0,0,0,.08);">
-
-<thead>
-
-<tr style="background:#0B5ED7;color:white;">
-
-<th style="padding:12px;">Nama</th>
-<th>Jawatan</th>
-<th>Jabatan</th>
-<th>Status</th>
-
-</tr>
-
-</thead>
-
-<tbody id="tableBody">
-
-</tbody>
-
-</table>
-
-</div>
-
-
-<script>
-const API_URL="https://script.google.com/macros/s/AKfycby18A9luLxRnX0yWmvVKRlz_wwgHff-BcoeQeDcbeNXvD5zGRKWbI2xpa2fhPlmGsaKAg/exec";
-let allData=[];
-
-function renderTable(rows){
- let html="";
- rows.forEach(item=>{
-   const status=item.sijil?"Lengkap":"Belum";
-   html+=`<tr>
-<td style="padding:10px">${item.nama}</td>
-<td>${item.jawatan}</td>
-<td>${item.jabatan}</td>
-<td style="color:${status==="Lengkap"?"green":"red"};font-weight:bold">${status}</td>
-</tr>`;
- });
- document.getElementById("tableBody").innerHTML=html;
-}
-
-function showDepartment(jabatan){
- renderTable(allData.filter(x=>x.jabatan===jabatan));
-}
-
-fetch(API_URL)
-.then(r=>r.json())
-.then(data=>{
- const seen=new Set();
- allData=data.filter(item=>{
-   const key=String(item.ic).replace(/-/g,"").replace(/\s/g,"").trim();
-   if(seen.has(key)) return false;
-   seen.add(key);
-   return true;
- });
-
- let lengkap=0;
- const jabatanCount={};
-
- allData.forEach(item=>{
-   if(item.sijil) lengkap++;
-   const j=item.jabatan||"TIADA JABATAN";
-   jabatanCount[j]=(jabatanCount[j]||0)+1;
- });
-
- document.getElementById("jumlah").textContent=allData.length;
- document.getElementById("lengkap").textContent=lengkap;
- document.getElementById("belum").textContent=allData.length-lengkap;
- document.getElementById("peratus").textContent=((lengkap/allData.length)*100).toFixed(1)+"%";
- document.getElementById("lastUpdate").textContent="Kemaskini : "+new Date().toLocaleString("ms-MY");
-
- renderTable(allData);
-
- const wrap=document.getElementById("departmentCards");
- wrap.innerHTML="";
-
- Object.entries(jabatanCount).sort((a,b)=>b[1]-a[1]).forEach(([jabatan,bil])=>{
-   const card=document.createElement("div");
-   card.className="dept-card";
-   card.style.cssText=`
-background:linear-gradient(135deg,#ffffff,#f8fbff);
-border-radius:20px;
-padding:22px;
-cursor:pointer;
-border:1px solid #dce8ff;
-box-shadow:0 12px 30px rgba(0,0,0,.08);
-transition:all .3s ease;
-position:relative;
-overflow:hidden;
-`;card.innerHTML=`
-
-<div style="display:flex;justify-content:space-between;align-items:center;">
-
-<div>
-
-<div style="
-font-size:13px;
-color:#6c757d;
-font-weight:600;
-letter-spacing:.5px;
-">
-JABATAN
-</div>
-
-<div style="
-font-size:18px;
-font-weight:700;
-margin-top:6px;
-color:#212529;
-">
-${jabatan}
-</div>
-
-</div>
-
-<div style="
-width:60px;
-height:60px;
-border-radius:18px;
-background:#eaf2ff;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(255,255,255,.85);
 display:flex;
-align-items:center;
 justify-content:center;
-font-size:30px;
-">
-🏥
-</div>
-
-</div>
-
-<div style="
-margin-top:22px;
-display:flex;
-justify-content:space-between;
-align-items:end;
+align-items:center;
+z-index:9999;
 ">
 
-<div>
+    <div style="text-align:center;">
 
-<div style="font-size:34px;font-weight:700;color:#0B5ED7;">
-${bil}
+        <i class="fa-solid fa-spinner fa-spin"
+        style="
+        font-size:50px;
+        color:#0B5ED7;
+        margin-bottom:20px;
+        "></i>
+
+        <div style="
+        font-size:18px;
+        font-weight:600;
+        color:#0B5ED7;
+        ">
+            Memuatkan Dashboard...
+        </div>
+
+    </div>
+
 </div>
 
-<div style="font-size:13px;color:#888;">
-Pegawai telah menghantar
-</div>
 
-</div>
+<!-- Toast -->
 
-<div style="
-color:#0B5ED7;
-font-weight:600;
+<div id="toast"
+style="
+position:fixed;
+bottom:25px;
+right:25px;
+background:#198754;
+color:white;
+padding:15px 22px;
+border-radius:12px;
+box-shadow:0 10px 25px rgba(0,0,0,.15);
+display:none;
+z-index:99999;
 font-size:14px;
 ">
-Lihat →
-</div>
+
+Data berjaya dikemaskini
 
 </div>
 
-`;
-   <p style="font-size:28px;font-weight:bold;color:#0B5ED7;">👥 ${bil}</p>
-   <small>Klik untuk lihat senarai pegawai</small>`;
-   card.addEventListener("click",()=>showDepartment(jabatan));
-   wrap.appendChild(card);
- });
-})
-.catch(err=>{
- console.error(err);
- alert("Ralat memuatkan data.");
-});
+
+<footer
+style="
+margin-top:40px;
+padding:25px;
+text-align:center;
+color:#666;
+font-size:14px;
+">
+
+Dashboard Pemantauan EPSA MMPA © 2026
+<br>
+Hospital Pulau Pinang
+
+</footer>
+    <script>
+
+const API_URL = "https://script.google.com/macros/s/AKfycby18A9luLxRnX0yWmvVKRlz_wwgHff-BcoeQeDcbeNXvD5zGRKWbI2xpa2fhPlmGsaKAg/exec";
+
+let allData = [];
+
+const loadingOverlay = document.getElementById("loadingOverlay");
+const tableBody = document.getElementById("tableBody");
+
+const jumlah = document.getElementById("jumlah");
+const lengkap = document.getElementById("lengkap");
+const belum = document.getElementById("belum");
+const peratus = document.getElementById("peratus");
+const lastUpdate = document.getElementById("lastUpdate");
+
+function showLoading(show){
+
+    loadingOverlay.style.display = show ? "flex" : "none";
+
+}
+
+function renderTable(data){
+
+    let html = "";
+
+    data.forEach(item=>{
+
+        const status = item.sijil ? "Lengkap" : "Belum";
+
+        html += `
+        <tr>
+
+            <td>${item.nama}</td>
+
+            <td>${item.jawatan}</td>
+
+            <td>${item.jabatan}</td>
+
+            <td>
+
+                <span class="status ${status==="Lengkap" ? "complete":"pending"}">
+
+                    ${status}
+
+                </span>
+
+            </td>
+
+            <td>${item.tarikh || "-"}</td>
+
+        </tr>
+        `;
+
+    });
+
+    tableBody.innerHTML = html;
+
+}
+
+async function loadData(){
+
+    try{
+
+        showLoading(true);
+
+        const response = await fetch(API_URL);
+
+        const data = await response.json();
+
+        const seen = new Set();
+
+        allData = [];
+
+        data.forEach(item=>{
+
+            const ic = String(item.ic)
+            .replace(/-/g,"")
+            .replace(/\s/g,"")
+            .trim();
+
+            if(!seen.has(ic)){
+
+                seen.add(ic);
+
+                allData.push(item);
+
+            }
+
+        });
+
+        let siap = 0;
+
+        allData.forEach(item=>{
+
+            if(item.sijil) siap++;
+
+        });
+
+        jumlah.textContent = allData.length;
+
+        lengkap.textContent = siap;
+
+        belum.textContent = allData.length - siap;
+
+        peratus.textContent =
+        ((siap/allData.length)*100).toFixed(1)+"%";
+
+        lastUpdate.textContent =
+        "Kemaskini : " + new Date().toLocaleString("ms-MY");
+
+        renderTable(allData);
+
+        showLoading(false);
+
+    }
+
+    catch(err){
+
+        console.error(err);
+
+        alert("Ralat mendapatkan data.");
+
+        showLoading(false);
+
+    }
+
+}
+
+loadData();
+
 </script>
-
 
 </body>
 
-</html>
+    
