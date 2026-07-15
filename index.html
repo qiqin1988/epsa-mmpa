@@ -192,6 +192,26 @@ Kemaskini :
 </div>
 
 </div>
+
+ <h2 style="margin-bottom:15px;">Ringkasan Mengikut Jabatan</h2>
+
+<table style="width:100%;background:white;border-collapse:collapse;box-shadow:0 5px 15px rgba(0,0,0,.08);margin-bottom:25px;">
+
+<thead>
+
+<tr style="background:#198754;color:white;">
+    <th style="padding:12px;">Jabatan</th>
+    <th>Bilangan Hantar</th>
+</tr>
+
+</thead>
+
+<tbody id="jabatanBody">
+
+</tbody>
+
+</table>
+    
 <h2 style="margin-bottom:15px;">Senarai Pegawai</h2>
 
 <table style="width:100%;background:white;border-collapse:collapse;box-shadow:0 5px 15px rgba(0,0,0,.08);">
@@ -229,6 +249,7 @@ fetch(API_URL,{
 
     const unique=[];
     const seen=new Set();
+    const jabatanCount = {};
 
     data.forEach(item=>{
 
@@ -251,6 +272,9 @@ fetch(API_URL,{
     unique.forEach(item=>{
 
         const status=item.sijil ? "Lengkap":"Belum";
+        const jabatan = item.jabatan || "TIADA JABATAN";
+
+jabatanCount[jabatan] = (jabatanCount[jabatan] || 0) + 1;
 
         if(status==="Lengkap") jumlahLengkap++;
 
@@ -264,7 +288,22 @@ fetch(API_URL,{
         `;
 
     });
+let jabatanHTML = "";
 
+Object.entries(jabatanCount)
+.sort((a,b)=>b[1]-a[1])
+.forEach(([jabatan,bil])=>{
+
+    jabatanHTML += `
+    <tr>
+        <td style="padding:10px">${jabatan}</td>
+        <td style="text-align:center;font-weight:bold">${bil}</td>
+    </tr>
+    `;
+
+});
+
+document.getElementById("jabatanBody").innerHTML = jabatanHTML;
     document.getElementById("tableBody").innerHTML=html;
 
     document.getElementById("jumlah").textContent=unique.length;
