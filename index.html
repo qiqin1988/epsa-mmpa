@@ -849,15 +849,11 @@ function renderTable(data){
         `;
 card.addEventListener("click",()=>{
 alert(jabatan);
-    renderTable(
+   const filtered = allData.filter(item => item.jabatan === jabatan);
 
-        allData.filter(item=>{
+alert(filtered.length);
 
-            return item.jabatan===jabatan;
-
-        })
-
-    );
+renderTable(filtered);
 
     document.getElementById("tableTitle").textContent=
     "Senarai Pegawai - " + jabatan;
