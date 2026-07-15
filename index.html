@@ -797,19 +797,7 @@ flex-direction:column;
 
         </button>
 
-<input
-id="searchPegawai"
-type="text"
-placeholder="🔍 Cari nama pegawai..."
-style="
-width:100%;
-margin:15px;
-width:calc(100% - 30px);
-padding:12px;
-border:1px solid #ddd;
-border-radius:10px;
-font-size:14px;
-">
+
 
 <div
 id="drawerBody"
@@ -999,21 +987,7 @@ ${item.sijil ? 'Lengkap':'Belum'}
     });
 
     document.getElementById("drawerBody").innerHTML = html;
-    const searchBox = document.getElementById("searchPegawai");
 
-searchBox.value = "";
-
-searchBox.onkeyup = function(){
-
-    const keyword = this.value.toLowerCase();
-
-    const result = currentData.filter(item =>
-
-        item.nama.toLowerCase().includes(keyword) ||
-
-        item.jawatan.toLowerCase().includes(keyword)
-
-    );
 
     let html = "";
 
