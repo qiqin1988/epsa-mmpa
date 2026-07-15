@@ -388,10 +388,15 @@ padding:20px;
 
 box-shadow:0 10px 30px rgba(0,0,0,.08);
 
-overflow:auto;
+height:520px;
+
+display:flex;
+
+flex-direction:column;
+
+overflow:hidden;
 
 }
-
 table{
 
 width:100%;
@@ -642,15 +647,37 @@ width:100%;
 
     <!-- Table -->
 
-    <div class="table-card">
+   <div class="table-card">
 
-        <h2 style="margin-bottom:18px;" id="tableTitle">
-            Senarai Pegawai
-        </h2>
+    <h2 style="margin-bottom:18px;" id="tableTitle">
+        Senarai Pegawai
+    </h2>
+       <div style="margin-bottom:15px;">
 
-        <table>
+<input
+id="searchTable"
+type="text"
+placeholder="🔍 Cari nama atau jawatan..."
+style="
+width:100%;
+padding:12px;
+border:1px solid #ddd;
+border-radius:10px;
+font-size:14px;
+outline:none;
+">
 
-            <thead>
+</div>
+
+    <div id="tableWrapper"
+    style="
+    flex:1;
+    overflow-y:auto;
+    ">
+
+    <table>
+
+        <thead>
 
                 <tr>
 
