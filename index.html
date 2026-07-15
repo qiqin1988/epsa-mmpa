@@ -847,7 +847,22 @@ function renderTable(data){
             </div>
             <small>Klik untuk lihat pegawai</small>
         `;
+card.addEventListener("click",()=>{
 
+    renderTable(
+
+        allData.filter(item=>{
+
+            return item.jabatan===jabatan;
+
+        })
+
+    );
+
+    document.getElementById("tableTitle").textContent=
+    "Senarai Pegawai - " + jabatan;
+
+});
         grid.appendChild(card);
 
     });
