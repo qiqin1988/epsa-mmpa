@@ -810,6 +810,49 @@ function renderTable(data){
     tableBody.innerHTML = html;
 
 }
+        function renderDepartmentCards(){
+
+    const grid = document.getElementById("departmentGrid");
+
+    grid.innerHTML = "";
+
+    const jabatanMap = {};
+
+    allData.forEach(item=>{
+
+        const jabatan = item.jabatan || "TIADA JABATAN";
+
+        if(!jabatanMap[jabatan]){
+
+            jabatanMap[jabatan]=0;
+
+        }
+
+        jabatanMap[jabatan]++;
+
+    });
+
+    Object.keys(jabatanMap)
+    .sort()
+    .forEach(jabatan=>{
+
+        const card=document.createElement("div");
+
+        card.className="department-card";
+
+        card.innerHTML=`
+            <h3>🏥 ${jabatan}</h3>
+            <div class="department-total">
+                ${jabatanMap[jabatan]}
+            </div>
+            <small>Klik untuk lihat pegawai</small>
+        `;
+
+        grid.appendChild(card);
+
+    });
+
+}
 
 async function loadData(){
 
@@ -863,6 +906,7 @@ async function loadData(){
         "Kemaskini : " + new Date().toLocaleString("ms-MY");
 
         renderTable(allData);
+        renderDepartmentCards();
 
         showLoading(false);
 
