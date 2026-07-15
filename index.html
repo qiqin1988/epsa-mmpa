@@ -292,7 +292,6 @@ Object.entries(jabatanCount)
 .forEach(([jabatan,bil])=>{
 
 cardHTML += `
-
 <div class="dept-card"
 data-jabatan="${jabatan}"
 style="
@@ -314,33 +313,35 @@ border-left:6px solid #0B5ED7;
 <small>Klik untuk lihat senarai pegawai</small>
 
 </div>
-
 `;
 
 });
 
 document.getElementById("departmentCards").innerHTML = cardHTML;
-    document.querySelectorAll(".dept-card").forEach(card => {
 
-    card.addEventListener("click", function(){
+document.getElementById("tableBody").innerHTML = html;
 
-        showDepartment(this.dataset.jabatan);
+document.getElementById("jumlah").textContent = unique.length;
 
-    });
+document.getElementById("lengkap").textContent = jumlahLengkap;
 
-    document.getElementById("tableBody").innerHTML=html;
+document.getElementById("belum").textContent = unique.length - jumlahLengkap;
 
-    document.getElementById("jumlah").textContent=unique.length;
+document.getElementById("peratus").textContent =
+((jumlahLengkap/unique.length)*100).toFixed(1)+"%";
 
-    document.getElementById("lengkap").textContent=jumlahLengkap;
+document.getElementById("lastUpdate").textContent =
+"Kemaskini : " + new Date().toLocaleString("ms-MY");
 
-    document.getElementById("belum").textContent=unique.length-jumlahLengkap;
+document.querySelectorAll(".dept-card").forEach(card=>{
 
-    document.getElementById("peratus").textContent=((jumlahLengkap/unique.length)*100).toFixed(1)+"%";
+card.addEventListener("click",function(){
 
-    document.getElementById("lastUpdate").textContent="Kemaskini : "+new Date().toLocaleString("ms-MY");
+showDepartment(this.dataset.jabatan);
 
-})
+});
+
+});
 .catch(error=>{
 
     console.error(error);
