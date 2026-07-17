@@ -157,6 +157,7 @@ gap:20px;
     box-shadow:0 6px 18px rgba(15,23,42,.08);
     transition:.25s;
     overflow:hidden;
+
 }
 
 .card:hover{
@@ -165,21 +166,14 @@ gap:20px;
 }
 
 .card::before{
-
-content:"";
-
-position:absolute;
-
-left:0;
-
-top:0;
-
-width:6px;
-
-height:100%;
-
-background:var(--primary);
-
+    content:"";
+    position:absolute;
+    top:-40px;
+    right:-40px;
+    width:120px;
+    height:120px;
+    background:rgba(255,255,255,.08);
+    border-radius:50%;
 }
 .kpi-sidebar .card:nth-child(1) .card-icon{
     background:linear-gradient(135deg,#3b82f6,#2563eb);
@@ -204,10 +198,12 @@ background:var(--primary);
     display:flex;
     align-items:center;
     justify-content:center;
-    font-size:15px;
-    margin-bottom:6px;
-background:rgba(255,255,255,.18);
-color:#fff;
+
+    background:rgba(255,255,255,.18);
+    border:1px solid rgba(255,255,255,.25);
+
+    color:#fff;
+    backdrop-filter:blur(8px);
 }
     .card-header{
     display:flex;
@@ -312,26 +308,27 @@ margin-bottom:30px;
     }
 
 /* KPI 1 - Jumlah */
+/* 👥 Jumlah Pegawai */
 .kpi-sidebar .card:nth-child(1){
-    background:linear-gradient(135deg,#3b82f6,#2563eb);
+    background:linear-gradient(135deg,#4f8dfd 0%, #2563eb 100%);
     color:#fff;
 }
 
-/* KPI 2 - Lengkap */
+/* ✅ Lengkap */
 .kpi-sidebar .card:nth-child(2){
-    background:linear-gradient(135deg,#22c55e,#16a34a);
+    background:linear-gradient(135deg,#34d399 0%, #16a34a 100%);
     color:#fff;
 }
 
-/* KPI 3 - Belum */
+/* ❌ Belum Lengkap */
 .kpi-sidebar .card:nth-child(3){
-    background:linear-gradient(135deg,#ef4444,#dc2626);
+    background:linear-gradient(135deg,#fb7185 0%, #dc2626 100%);
     color:#fff;
 }
 
-/* KPI 4 - Peratus */
+/* 📈 Peratus */
 .kpi-sidebar .card:nth-child(4){
-    background:linear-gradient(135deg,#8b5cf6,#7c3aed);
+    background:linear-gradient(135deg,#a78bfa 0%, #7c3aed 100%);
     color:#fff;
 }
 
