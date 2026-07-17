@@ -143,27 +143,18 @@ gap:20px;
 }
 
 .card{
-
-background:var(--card);
-
-border-radius:18px;
-
-padding:25px;
-
-box-shadow:0 10px 30px rgba(0,0,0,.08);
-
-transition:.25s;
-
-position:relative;
-
-overflow:hidden;
-
+    position:relative;
+    background:#fff;
+    border-radius:16px;
+    padding:22px;
+    box-shadow:0 8px 24px rgba(15,23,42,.08);
+    transition:.25s ease;
+    overflow:hidden;
 }
 
 .card:hover{
-
-transform:translateY(-6px);
-
+    transform:translateY(-4px);
+    box-shadow:0 14px 30px rgba(15,23,42,.15);
 }
 
 .card::before{
@@ -183,15 +174,32 @@ height:100%;
 background:var(--primary);
 
 }
+.kpi-sidebar .card:nth-child(1) .card-icon{
+    background:linear-gradient(135deg,#3b82f6,#2563eb);
+}
 
+.kpi-sidebar .card:nth-child(2) .card-icon{
+    background:linear-gradient(135deg,#22c55e,#16a34a);
+}
+
+.kpi-sidebar .card:nth-child(3) .card-icon{
+    background:linear-gradient(135deg,#ef4444,#dc2626);
+}
+
+.kpi-sidebar .card:nth-child(4) .card-icon{
+    background:linear-gradient(135deg,#8b5cf6,#7c3aed);
+}
+    
 .card-icon{
-
-font-size:28px;
-
-color:var(--primary);
-
-margin-bottom:12px;
-
+    width:52px;
+    height:52px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:22px;
+    margin-bottom:14px;
+    color:#fff;
 }
 
 .card-title{
@@ -295,6 +303,25 @@ align-items:start;
 
 margin-bottom:30px;
 
+}
+/* KPI 1 - Jumlah */
+.kpi-sidebar .card:nth-child(1){
+    border-left:6px solid #2563eb;
+}
+
+/* KPI 2 - Lengkap */
+.kpi-sidebar .card:nth-child(2){
+    border-left:6px solid #16a34a;
+}
+
+/* KPI 3 - Belum */
+.kpi-sidebar .card:nth-child(3){
+    border-left:6px solid #dc2626;
+}
+
+/* KPI 4 - Peratus */
+.kpi-sidebar .card:nth-child(4){
+    border-left:6px solid #7c3aed;
 }
 
 .kpi-sidebar{
