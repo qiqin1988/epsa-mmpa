@@ -1066,14 +1066,16 @@ async function loadData(){
 
         });
 
-        jumlah.textContent = allData.length + " / 3000";
+const TOTAL_STAFF = 3000;
 
-        lengkap.textContent = siap;
+jumlah.textContent = `${allData.length} / ${TOTAL_STAFF}`;
 
-        belum.textContent = allData.length - siap;
+lengkap.textContent = `${siap} / ${TOTAL_STAFF}`;
 
-        peratus.textContent =
-        ((siap/allData.length)*100).toFixed(1)+"%";
+belum.textContent = `${TOTAL_STAFF - siap} / ${TOTAL_STAFF}`;
+
+peratus.textContent =
+((siap / TOTAL_STAFF) * 100).toFixed(1) + "%";
 
         lastUpdate.textContent =
         "Kemaskini : " + new Date().toLocaleString("ms-MY");
