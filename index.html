@@ -1065,6 +1065,11 @@ async function loadData(){
             if(item.sijil) siap++;
 
         });
+        
+        console.log("allData =", allData.length);
+console.log("siap =", siap);
+console.log("TOTAL_STAFF =", TOTAL_STAFF);
+console.log("Peratus =", ((siap / TOTAL_STAFF) * 100).toFixed(1));
 
 const TOTAL_STAFF = 3000;
 
