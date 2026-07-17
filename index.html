@@ -283,6 +283,33 @@ top:15px;
 color:#888;
 
 }
+    .dashboard-layout{
+
+display:grid;
+
+grid-template-columns:280px 1fr;
+
+gap:25px;
+
+align-items:start;
+
+margin-bottom:30px;
+
+}
+
+.kpi-sidebar{
+
+position:sticky;
+
+top:20px;
+
+}
+
+.dashboard-main{
+
+min-width:0;
+
+}
 
 .department-grid{
 
@@ -524,9 +551,12 @@ width:100%;
 
     <!-- KPI -->
 
-    <section class="section">
+ <div class="dashboard-layout">
 
-        <div class="cards">
+<div class="kpi-sidebar">
+
+<section class="section">
+
 
             <div class="card">
 
@@ -608,12 +638,15 @@ width:100%;
 
             </div>
 
-        </div>
+    </div>
 
-    </section>
+</section>
 
+</div>
 
-    <!-- Toolbar -->
+<div class="dashboard-main">
+
+<!-- Toolbar -->
 
     <section class="toolbar">
 
@@ -639,13 +672,16 @@ width:100%;
     <!-- Department Cards -->
 
     <div
-        id="departmentGrid"
-        class="department-grid">
+id="departmentGrid"
+class="department-grid">
 
-    </div>
+</div>
 
+</div>
 
-    <!-- Table -->
+</div>
+
+<!-- Table -->
 
    <div class="table-card">
 
