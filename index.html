@@ -1142,7 +1142,23 @@ document.getElementById("searchDepartment").addEventListener("input", function()
 
 });
       
+document.getElementById("searchTable").addEventListener("input", function(){
 
+    const keyword = this.value.toLowerCase();
+
+    const filtered = allData.filter(item =>
+
+        (item.nama || "").toLowerCase().includes(keyword) ||
+
+        (item.jawatan || "").toLowerCase().includes(keyword) ||
+
+        (item.jabatan || "").toLowerCase().includes(keyword)
+
+    );
+
+    renderTable(filtered);
+
+});
 async function loadData(){
 
     try{
@@ -1206,27 +1222,7 @@ peratus.textContent =
 
         showLoading(false);
         
-       const searchTable = document.getElementById("searchTable");
-
-searchTable.addEventListener("input", function(){
-
-    console.log("Search bawah:", this.value);
-
-    const keyword = this.value.toLowerCase();
-
-    const filtered = allData.filter(item =>
-
-        (item.nama || "").toLowerCase().includes(keyword) ||
-
-        (item.jawatan || "").toLowerCase().includes(keyword) ||
-
-        (item.jabatan || "").toLowerCase().includes(keyword)
-
-    );
-
-    renderTable(filtered);
-
-});
+   
 
     }
 
