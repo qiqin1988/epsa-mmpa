@@ -1013,7 +1013,7 @@ function renderTable(data){
     tableBody.innerHTML = html;
 
 }
-        function renderDepartmentCards(){
+        function renderDepartmentCards(keyword = ""){
 
     const grid = document.getElementById("departmentGrid");
 
@@ -1035,9 +1035,12 @@ function renderTable(data){
 
     });
 
-    Object.keys(jabatanMap)
-    .sort()
-    .forEach(jabatan=>{
+  Object.keys(jabatanMap)
+.sort()
+.filter(jabatan =>
+    jabatan.toLowerCase().includes(keyword.toLowerCase())
+)
+.forEach(jabatan=>{
 
         const card=document.createElement("div");
 
@@ -1133,6 +1136,12 @@ ${item.sijil ? 'Lengkap':'Belum'}
     });
 
 }
+document.getElementById("searchDepartment").addEventListener("input", function(){
+
+    renderDepartmentCards(this.value);
+
+});
+      
 
 async function loadData(){
 
