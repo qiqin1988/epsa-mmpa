@@ -1169,7 +1169,7 @@ async function loadData(){
 
         const data = await response.json();
 
-        console.log(data[0]);
+        console.log(JSON.stringify(data[0], null, 2));
 
         const seen = new Set();
 
