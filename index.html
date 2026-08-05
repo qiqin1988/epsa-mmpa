@@ -1007,6 +1007,11 @@ function openDrawer(){
     drawer.style.width = "100%";
     drawer.style.maxWidth = "450px";
     drawer.style.right = "0px";
+    drawer.style.display = "flex";
+drawer.style.zIndex = "99999";
+
+    console.log(window.getComputedStyle(drawer).right);
+console.log(window.getComputedStyle(drawer).display);
 
 
 }
