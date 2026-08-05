@@ -924,13 +924,14 @@ Hospital Pulau Pinang
 <div id="drawer" style="
 position:fixed;
 top:0;
-right:-100%;
 width:100%;
 max-width:450px;
 height:100%;
 background:white;
 box-shadow:-8px 0 20px rgba(0,0,0,.2);
-transition:.3s;
+right:0;
+transform:translateX(100%);
+transition:transform .3s ease;
 z-index:9999;
 display:flex;
 flex-direction:column;
@@ -1003,32 +1004,14 @@ function openDrawer(){
 
     const drawer = document.getElementById("drawer");
 
-    alert("openDrawer dipanggil");
-
-    drawer.style.position = "fixed";
-    drawer.style.top = "0";
-    drawer.style.left = "0";
-    drawer.style.right = "0";
-    drawer.style.width = "100%";
-    drawer.style.height = "100vh";
-    drawer.style.background = "red";
-    drawer.style.zIndex = "999999";
-
+    drawer.style.transform = "translateX(0)";
 }
 
 function closeDrawer(){
 
     const drawer = document.getElementById("drawer");
 
-    if(window.innerWidth <= 768){
-
-        drawer.style.right = "-100%";
-
-    }else{
-
-        drawer.style.right = "-500px";
-
-    }
+    drawer.style.transform = "translateX(100%)";
 }
 
 function renderTable(data){
