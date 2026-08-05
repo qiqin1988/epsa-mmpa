@@ -1001,13 +1001,36 @@ function showLoading(show){
 }
 function openDrawer(){
 
-    document.getElementById("drawer").style.right = "0";
+    const drawer = document.getElementById("drawer");
+
+    if(window.innerWidth <= 768){
+
+        drawer.style.width = "100%";
+        drawer.style.right = "0";
+
+    }else{
+
+        drawer.style.width = "450px";
+        drawer.style.right = "0";
+
+    }
 
 }
 
 function closeDrawer(){
 
-document.getElementById("drawer").style.right="-100%";
+    const drawer = document.getElementById("drawer");
+
+    if(window.innerWidth <= 768){
+
+        drawer.style.right = "-100%";
+
+    }else{
+
+        drawer.style.right = "-500px";
+
+    }
+
 
 
 }
