@@ -1004,16 +1004,35 @@ function openDrawer(){
 
     const drawer = document.getElementById("drawer");
 
-    drawer.style.background = "red";
-    drawer.style.right = "0px";
-}
+    if(window.innerWidth <= 768){
+
+        drawer.style.width = "100%";
+        drawer.style.maxWidth = "100%";
+        drawer.style.right = "0";
+
+    }else{
+
+        drawer.style.width = "450px";
+        drawer.style.maxWidth = "450px";
+        drawer.style.right = "0";
+
+    }
+
 
 function closeDrawer(){
 
     const drawer = document.getElementById("drawer");
 
-    drawer.style.transform = "translateX(100%)";
-}
+    if(window.innerWidth <= 768){
+
+        drawer.style.right = "-100%";
+
+    }else{
+
+        drawer.style.right = "-500px";
+
+    }
+
 
 function renderTable(data){
 
