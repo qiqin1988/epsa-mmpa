@@ -1021,10 +1021,10 @@ searchTable.addEventListener("input", function () {
 
     const filtered = allData.filter(item =>
 
-        (item.nama || "").toLowerCase().includes(keyword) ||
-        (item.jawatan || "").toLowerCase().includes(keyword) ||
-        (item.jabatan || "").toLowerCase().includes(keyword) ||
-        (item.gred || "").toLowerCase().includes(keyword)
+String(item.nama || "").toLowerCase().includes(keyword) ||
+String(item.jawatan || "").toLowerCase().includes(keyword) ||
+String(item.jabatan || "").toLowerCase().includes(keyword) ||
+String(item.gred || "").toLowerCase().includes(keyword)
 
     );
 
