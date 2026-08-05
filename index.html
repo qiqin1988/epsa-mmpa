@@ -1003,19 +1003,9 @@ function openDrawer(){
 
     const drawer = document.getElementById("drawer");
 
-    if(window.innerWidth <= 768){
-
-        drawer.style.width = "100%";
-        drawer.style.maxWidth = "100%";
-        drawer.style.right = "0";
-
-    }else{
-
-        drawer.style.width = "450px";
-        drawer.style.maxWidth = "450px";
-        drawer.style.right = "0";
-
-    }
+    drawer.style.width = "100%";
+    drawer.style.maxWidth = "450px";
+    drawer.style.right = "0px";
 
 
 }
@@ -1035,8 +1025,6 @@ function closeDrawer(){
     }
 
 
-
-}
 function renderTable(data){
 
     let html = "";
