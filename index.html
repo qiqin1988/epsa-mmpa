@@ -587,6 +587,39 @@ align-items:stretch;
     grid-template-columns:repeat(2,1fr);
     gap:12px;
 }
+    #drawer{
+
+width:100% !important;
+
+max-width:100% !important;
+
+right:-100% !important;
+
+}
+
+#drawer h2{
+
+font-size:22px;
+
+line-height:1.3;
+
+word-break:break-word;
+
+}
+
+#drawer > div:first-child{
+
+padding:16px !important;
+
+}
+
+#drawerBody{
+
+padding:16px !important;
+
+padding-top:0 !important;
+
+}
 
 }
 
@@ -891,12 +924,13 @@ Hospital Pulau Pinang
 <div id="drawer" style="
 position:fixed;
 top:0;
-right:-500px;
+right:-100%;
 width:450px;
+max-width:100%;
 height:100%;
 background:white;
 box-shadow:-8px 0 20px rgba(0,0,0,.2);
-transition:0.3s;
+transition:.3s;
 z-index:9999;
 display:flex;
 flex-direction:column;
@@ -973,7 +1007,8 @@ function openDrawer(){
 
 function closeDrawer(){
 
-    document.getElementById("drawer").style.right = "-500px";
+document.getElementById("drawer").style.right="-100%";
+
 
 }
 function renderTable(data){
