@@ -925,8 +925,8 @@ Hospital Pulau Pinang
 position:fixed;
 top:0;
 right:-100%;
-width:450px;
-max-width:100%;
+width:100%;
+max-width:450px;
 height:100%;
 background:white;
 box-shadow:-8px 0 20px rgba(0,0,0,.2);
@@ -1006,14 +1006,17 @@ function openDrawer(){
     if(window.innerWidth <= 768){
 
         drawer.style.width = "100%";
+        drawer.style.maxWidth = "100%";
         drawer.style.right = "0";
 
     }else{
 
         drawer.style.width = "450px";
+        drawer.style.maxWidth = "450px";
         drawer.style.right = "0";
 
     }
+
 
 }
 
